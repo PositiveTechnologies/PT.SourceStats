@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>PT.SourceStats</id>
+    <version>1.0</version>
+    <description>Utility for collecting statistics of function invocations, files, dependencies and other features for C#, Java, PHP projects. </description>
+    <authors>Positive Technologies</authors>
+    
+    <owners>ptsecurity,KvanTTT</owners>
+    <title>PT Source Statistics</title>
+    <licenseUrl>https://creativecommons.org/licenses/by-nc/4.0/legalcode</licenseUrl>
+    <projectUrl>https://approof.ptsecurity.com/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <copyright>Copyright 2016-2017</copyright>
+    <tags>csharp java php stats function dependency version</tags>
+    
+    <dependencies>
+      <dependency id="PT.PM" version="0.9.3.41" />
+      <dependency id="FluentCommandLineParser" version="1.4.3" />
+      <dependency id="NLog" version="4.1.1" />
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="bin\Release\PT.SourceStats\PT.SourceStats.Cli.exe" target="lib\net45\" />
+    <file src="bin\Release\PT.SourceStats\PT.SourceStats.dll" target="lib\net45\" />
+    <file src="bin\Release\PT.SourceStats\*.config" target="lib\net45\" />
+  </files>
+</package>
