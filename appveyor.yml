@@ -13,9 +13,9 @@ assembly_info:
   assembly_informational_version: '{version}'
 before_build:
 - cmd: >-
-  nuget sources add -Name PositiveTechnologies-AppVeyor -Source https://ci.appveyor.com/nuget/pt-pm-mk0aj1y5uned
+    nuget sources add -Name PositiveTechnologies-AppVeyor -Source https://ci.appveyor.com/nuget/pt-pm-mk0aj1y5uned
 
-  nuget restore PT.SourceStats.sln
+    nuget restore PT.SourceStats.sln
 build:
   project: PT.SourceStats.sln
   verbosity: minimal
@@ -25,11 +25,11 @@ test:
   - PT.SourceStats.Tests\bin\$(configuration)\*.Tests.dll
 after_test:
 - cmd: >-
-  nuget pack PT.SourceStats.nuspec -version %APPVEYOR_BUILD_VERSION%
+    nuget pack PT.SourceStats.nuspec -version %APPVEYOR_BUILD_VERSION%
 
-  cd bin\%CONFIGURATION%\PT.SourceStats
+    cd bin\%CONFIGURATION%\PT.SourceStats
 
-  7z a PT.SourceStats.Cli-%APPVEYOR_BUILD_VERSION%.zip *.dll PT.SourceStats.Cli.exe *.config
+    7z a PT.SourceStats.Cli-%APPVEYOR_BUILD_VERSION%.zip *.dll PT.SourceStats.Cli.exe *.config
 artifacts:
 - path: bin\$(configuration)\PT.SourceStats\*.zip
   name: PT.SourceStats.Cli
