@@ -15,7 +15,7 @@
     <tags>csharp java php stats function dependency version</tags>
     
     <dependencies>
-      <dependency id="PT.PM" version="0.9.3.41" />
+      <dependency id="PT.PM" version="0.9.5.55" />
       <dependency id="FluentCommandLineParser" version="1.4.3" />
       <dependency id="NLog" version="4.1.1" />
     </dependencies>
