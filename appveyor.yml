@@ -13,7 +13,7 @@ assembly_info:
   assembly_informational_version: '{version}'
 before_build:
 - cmd: >-
-    nuget sources add -Name PositiveTechnologies-AppVeyor -Source https://ci.appveyor.com/nuget/pt-pm-mk0aj1y5uned
+    nuget sources add -Name PT.PM -Source https://ci.appveyor.com/nuget/pt-pm-mk0aj1y5uned
 
     nuget restore PT.SourceStats.sln
 build:
