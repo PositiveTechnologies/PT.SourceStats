@@ -5,6 +5,6 @@
         All = 0,
         Errors = 1,
         Result = 2,
-        Silent
+        Silent = 3
     }
 }
