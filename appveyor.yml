@@ -1,0 +1,32 @@
+os: Visual Studio 2017
+version: 0.9.5.{build}
+configuration: Release
+platform: Any CPU
+skip_branch_with_pr: true
+nuget:
+  disable_publish_on_pr: true
+assembly_info:
+  patch: true
+  file: AssemblyInfoCommon.cs
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+build:
+  project: PT.SourceStats.sln
+  verbosity: minimal
+  publish_nuget: true
+test:
+  assemblies:
+  - PT.SourceStats.Tests\bin\$(configuration)\*.Tests.dll
+after_test:
+- cmd: >-
+    nuget pack PT.SourceStats.nuspec -version %APPVEYOR_BUILD_VERSION%
+
+    cd bin\%CONFIGURATION%\PT.SourceStats
+
+    7z a PT.SourceStats.Cli-%APPVEYOR_BUILD_VERSION%.zip *.dll PT.SourceStats.Cli.exe *.config
+artifacts:
+- path: bin\$(configuration)\PT.SourceStats\*.zip
+  name: PT.SourceStats.Cli
+- path: '*.nupkg'
+  name: PT.SourceStats.NuGet
