@@ -35,7 +35,7 @@
       <HintPath>..\packages\Antlr4.Runtime.4.6.1\lib\net45\Antlr4.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="AspxParser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c8e42bbdfc6e2790, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\AspxParser.dll</HintPath>
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\AspxParser.dll</HintPath>
     </Reference>
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
@@ -48,68 +48,68 @@
       <HintPath>..\packages\Microsoft.Build.Framework.15.1.1012\lib\net46\Microsoft.Build.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.2.1.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.2.2.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.2.1.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.2.2.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.Workspaces.2.1.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.Workspaces.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.Workspaces.2.2.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.Workspaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.Elfie, Version=0.10.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Elfie.0.10.6\lib\net46\Microsoft.CodeAnalysis.Elfie.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.VisualBasic, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.VisualBasic.2.1.0\lib\netstandard1.3\Microsoft.CodeAnalysis.VisualBasic.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.VisualBasic, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.VisualBasic.2.2.0\lib\netstandard1.3\Microsoft.CodeAnalysis.VisualBasic.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.VisualBasic.Workspaces.2.1.0\lib\netstandard1.3\Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.VisualBasic.Workspaces.2.2.0\lib\netstandard1.3\Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Workspaces, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.1.0\lib\net46\Microsoft.CodeAnalysis.Workspaces.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.Workspaces, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.2.0\lib\net46\Microsoft.CodeAnalysis.Workspaces.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Workspaces.Desktop, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.1.0\lib\net46\Microsoft.CodeAnalysis.Workspaces.Desktop.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.Workspaces.Desktop, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.2.0\lib\net46\Microsoft.CodeAnalysis.Workspaces.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.dll</HintPath>
+    <Reference Include="PT.PM, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.AntlrUtils, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.AntlrUtils.dll</HintPath>
+    <Reference Include="PT.PM.AntlrUtils, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.AntlrUtils.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.Common, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.Common.dll</HintPath>
+    <Reference Include="PT.PM.Common, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.Common.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.CSharpParseTreeUst, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.CSharpParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.CSharpParseTreeUst, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.CSharpParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.Dsl, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.Dsl.dll</HintPath>
+    <Reference Include="PT.PM.Dsl, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.Dsl.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.JavaParseTreeUst, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.JavaParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.JavaParseTreeUst, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.JavaParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.JavaScriptParseTreeUst, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.JavaScriptParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.JavaScriptParseTreeUst, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.JavaScriptParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.Matching, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.Matching.dll</HintPath>
+    <Reference Include="PT.PM.Matching, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.Matching.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.Patterns, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.Patterns.dll</HintPath>
+    <Reference Include="PT.PM.Patterns, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.Patterns.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.PhpParseTreeUst, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.PhpParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.PhpParseTreeUst, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.PhpParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.SqlParseTreeUst, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.SqlParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.SqlParseTreeUst, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.SqlParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.UstPreprocessing, Version=0.9.5.62, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\PT.PM.UstPreprocessing.dll</HintPath>
+    <Reference Include="PT.PM.UstPreprocessing, Version=0.9.5.64, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\PT.PM.UstPreprocessing.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -177,7 +177,7 @@
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.RegularExpressions">
-      <HintPath>..\packages\PT.PM.0.9.5.62\lib\net462\System.Web.RegularExpressions.dll</HintPath>
+      <HintPath>..\packages\PT.PM.0.9.5.64\lib\net462\System.Web.RegularExpressions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
