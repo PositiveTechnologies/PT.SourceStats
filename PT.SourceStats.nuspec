@@ -22,8 +22,8 @@
   </metadata>
 
   <files>
-    <file src="bin\Release\PT.SourceStats\PT.SourceStats.Cli.exe" target="lib\net45\" />
-    <file src="bin\Release\PT.SourceStats\PT.SourceStats.dll" target="lib\net45\" />
-    <file src="bin\Release\PT.SourceStats\*.config" target="lib\net45\" />
+    <file src="bin\Release\PT.SourceStats\PT.SourceStats.Cli.exe" target="lib\net462\" />
+    <file src="bin\Release\PT.SourceStats\PT.SourceStats.dll" target="lib\net462\" />
+    <file src="bin\Release\PT.SourceStats\*.config" target="lib\net462\" />
   </files>
 </package>
