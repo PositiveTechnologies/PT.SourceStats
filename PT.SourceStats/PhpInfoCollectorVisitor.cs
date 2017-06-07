@@ -725,27 +725,7 @@ namespace PT.SourceStats
             return VisitChildren(context);
         }
 
-        public string VisitAndOrExpression([NotNull] PHPParser.AndOrExpressionContext context)
-        {
-            return VisitChildren(context);
-        }
-
         public string VisitComparisonExpression([NotNull] PHPParser.ComparisonExpressionContext context)
-        {
-            return VisitChildren(context);
-        }
-
-        public string VisitAdditionExpression([NotNull] PHPParser.AdditionExpressionContext context)
-        {
-            return VisitChildren(context);
-        }
-
-        public string VisitMultiplicationExpression([NotNull] PHPParser.MultiplicationExpressionContext context)
-        {
-            return VisitChildren(context);
-        }
-
-        public string VisitNotLeftRecursionExpression([NotNull] PHPParser.NotLeftRecursionExpressionContext context)
         {
             return VisitChildren(context);
         }
@@ -956,6 +936,31 @@ namespace PT.SourceStats
         }
 
         public string VisitCastOperation([NotNull] PHPParser.CastOperationContext context)
+        {
+            return VisitChildren(context);
+        }
+
+        public string VisitConditionalExpression([NotNull] PHPParser.ConditionalExpressionContext context)
+        {
+            return VisitChildren(context);
+        }
+
+        public string VisitArithmeticExpression([NotNull] PHPParser.ArithmeticExpressionContext context)
+        {
+            return VisitChildren(context);
+        }
+
+        public string VisitLogicalExpression([NotNull] PHPParser.LogicalExpressionContext context)
+        {
+            return VisitChildren(context);
+        }
+
+        public string VisitInstanceOfExpression([NotNull] PHPParser.InstanceOfExpressionContext context)
+        {
+            return VisitChildren(context);
+        }
+
+        public string VisitBitwiseExpression([NotNull] PHPParser.BitwiseExpressionContext context)
         {
             return VisitChildren(context);
         }
