@@ -40,7 +40,7 @@ namespace PT.SourceStats.Cli
                     (message.MessageType == MessageType.Error && LogLevel <= LogLevel.Errors) ||
                     (message.MessageType == MessageType.Result && LogLevel <= LogLevel.Result))
                 {
-                    var json = JsonConvert.SerializeObject(message, Formatting.Indented, LanguageJsonConverter.Instance);
+                    var json = JsonConvert.SerializeObject(message, Formatting.Indented);
                     ConsoleLogger.Info(json);
                     FileLogger.Info(json);
                 }

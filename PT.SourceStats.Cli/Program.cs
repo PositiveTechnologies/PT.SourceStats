@@ -73,7 +73,7 @@ namespace PT.SourceStats.Cli
                     try
                     {
                         var statSender = new StatSender();
-                        var text = JsonConvert.SerializeObject(statisticsMessage, LanguageJsonConverter.Instance);
+                        var text = JsonConvert.SerializeObject(statisticsMessage);
                         try
                         {
                             if (!IsNullOrWhiteSpace(outDir))

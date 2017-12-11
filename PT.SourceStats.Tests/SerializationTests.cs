@@ -26,9 +26,9 @@ namespace PT.SourceStats.Tests
                     }
                 }
             };
-            string expectedJson = JsonConvert.SerializeObject(messages, Formatting.Indented, LanguageJsonConverter.Instance);
-            var deserialized = JsonConvert.DeserializeObject<Message[]>(expectedJson, new MessagesJsonConverter(), LanguageJsonConverter.Instance);
-            string actualJson = JsonConvert.SerializeObject(deserialized, Formatting.Indented, LanguageJsonConverter.Instance);
+            string expectedJson = JsonConvert.SerializeObject(messages, Formatting.Indented);
+            var deserialized = JsonConvert.DeserializeObject<Message[]>(expectedJson, new MessagesJsonConverter());
+            string actualJson = JsonConvert.SerializeObject(deserialized, Formatting.Indented);
 
             Assert.AreEqual(expectedJson, actualJson);
         }
