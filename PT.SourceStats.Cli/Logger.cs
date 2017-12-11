@@ -2,6 +2,7 @@
 using System;
 using NLog;
 using PT.PM.Common.CodeRepository;
+using PT.PM.Common.Json;
 
 namespace PT.SourceStats.Cli
 {
@@ -19,12 +20,6 @@ namespace PT.SourceStats.Cli
 
         public void LogDebug(string message)
         {
-        }
-
-        public void LogError(string message)
-        {
-            errorCount++;
-            LogInfo(new ErrorMessage(message));
         }
 
         public void LogError(Exception ex)
@@ -45,7 +40,7 @@ namespace PT.SourceStats.Cli
                     (message.MessageType == MessageType.Error && LogLevel <= LogLevel.Errors) ||
                     (message.MessageType == MessageType.Result && LogLevel <= LogLevel.Result))
                 {
-                    var json = JsonConvert.SerializeObject(message, Formatting.Indented);
+                    var json = JsonConvert.SerializeObject(message, Formatting.Indented, LanguageJsonConverter.Instance);
                     ConsoleLogger.Info(json);
                     FileLogger.Info(json);
                 }
