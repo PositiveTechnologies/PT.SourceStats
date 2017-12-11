@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
-using PT.PM.Common.CodeRepository;
 using NLog;
+using PT.PM.Common.CodeRepository;
 
 namespace PT.SourceStats.Cli
 {
@@ -15,7 +15,7 @@ namespace PT.SourceStats.Cli
 
         public LogLevel LogLevel { get; set; }
 
-        public ISourceCodeRepository SourceCodeRepository { get; set; }
+        public SourceCodeRepository SourceCodeRepository { get; set; }
 
         public void LogDebug(string message)
         {

@@ -1,11 +1,12 @@
 ﻿using PT.PM.Common;
+using PT.PM.JavaParseTreeUst;
 using System.Collections.Generic;
 
 namespace PT.SourceStats
 {
     public class JavaStatistics : LanguageStatistics
     {
-        public override Language Language => Language.Java;
+        public override Language Language => Java.Language;
 
         public int FilesCount { get; set; } = 0;
 

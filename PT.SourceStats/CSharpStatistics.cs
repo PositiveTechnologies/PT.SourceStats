@@ -1,11 +1,12 @@
 ﻿using PT.PM.Common;
+using PT.PM.CSharpParseTreeUst;
 using System.Collections.Generic;
 
 namespace PT.SourceStats
 {
     public class CSharpStatistics : LanguageStatistics
     {
-        public override Language Language => Language.CSharp;
+        public override Language Language => CSharp.Language;
 
         public int FilesCount { get; set; } = 0;
 

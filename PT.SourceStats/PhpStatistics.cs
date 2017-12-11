@@ -1,11 +1,12 @@
 ﻿using PT.PM.Common;
+using PT.PM.PhpParseTreeUst;
 using System.Collections.Generic;
 
 namespace PT.SourceStats
 {
     public class PhpStatistics : LanguageStatistics
     {
-        public override Language Language => Language.Php;
+        public override Language Language => Php.Language;
 
         public Dictionary<string, string> FilesContent { get; set; } = new Dictionary<string, string>();
 

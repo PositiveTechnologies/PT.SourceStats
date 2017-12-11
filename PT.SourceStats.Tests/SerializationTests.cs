@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
+using PT.PM.Common.Json;
 using System.Collections.Generic;
 
 namespace PT.SourceStats.Tests
@@ -25,9 +26,9 @@ namespace PT.SourceStats.Tests
                     }
                 }
             };
-            var expectedJson = JsonConvert.SerializeObject(messages, Formatting.Indented);
-            var deserialized = JsonConvert.DeserializeObject<Message[]>(expectedJson, new MessagesJsonConverter());
-            var actualJson = JsonConvert.SerializeObject(deserialized, Formatting.Indented);
+            string expectedJson = JsonConvert.SerializeObject(messages, Formatting.Indented, LanguageJsonConverter.Instance);
+            var deserialized = JsonConvert.DeserializeObject<Message[]>(expectedJson, new MessagesJsonConverter(), LanguageJsonConverter.Instance);
+            string actualJson = JsonConvert.SerializeObject(deserialized, Formatting.Indented, LanguageJsonConverter.Instance);
 
             Assert.AreEqual(expectedJson, actualJson);
         }

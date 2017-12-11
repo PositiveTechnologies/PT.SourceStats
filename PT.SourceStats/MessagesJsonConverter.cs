@@ -1,7 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PT.PM.Common;
+using PT.PM.CSharpParseTreeUst;
+using PT.PM.JavaParseTreeUst;
+using PT.PM.PhpParseTreeUst;
 using System;
+using System.Linq;
 
 namespace PT.SourceStats
 {
@@ -45,20 +49,22 @@ namespace PT.SourceStats
                 else if (objectType == typeof(LanguageStatistics))
                 {
                     JToken token = jObject[nameof(Language)];
-                    var language = (Language)Enum.Parse(typeof(Language), token.ToString());
-                    switch (language)
+                    Language language = LanguageUtils.ParseLanguages(token.ToString()).FirstOrDefault();
+                    if (language == CSharp.Language)
                     {
-                        case Language.CSharp:
-                            result = new CSharpStatistics();
-                            break;
-                        case Language.Java:
-                            result = new JavaStatistics();
-                            break;
-                        case Language.Php:
-                            result = new PhpStatistics();
-                            break;
-                        default:
-                            throw new NotImplementedException($"{token.ToString()} language is not supported");
+                        result = new CSharpStatistics();
+                    }
+                    else if (language == Java.Language)
+                    {
+                        result = new JavaStatistics();
+                    }
+                    else if (language == Php.Language)
+                    {
+                        result = new PhpStatistics();
+                    }
+                    else
+                    {
+                        throw new NotImplementedException($"{token.ToString()} language is not supported");
                     }
                 }
                 else

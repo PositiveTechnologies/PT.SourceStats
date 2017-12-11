@@ -468,7 +468,7 @@ namespace PT.SourceStats
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex.ToString());
+                Logger?.LogError(ex);
             }
         }
 
@@ -546,7 +546,7 @@ namespace PT.SourceStats
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex.ToString());
+                Logger?.LogError(ex);
             }
         }
 

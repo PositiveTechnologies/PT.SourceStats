@@ -3,7 +3,6 @@ using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using PT.PM.Common;
 using PT.PM.PhpParseTreeUst;
-using PT.PM.UstParsing;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +10,7 @@ using System.Text;
 
 namespace PT.SourceStats
 {
-    public class PhpInfoCollectorVisitor : IPHPParserVisitor<string>, IFileStatisticsCollector
+    public class PhpInfoCollectorVisitor : IPhpParserVisitor<string>, IFileStatisticsCollector
     {
         private string Delimeter = "";
 
@@ -34,7 +33,7 @@ namespace PT.SourceStats
             parser.Logger = Logger;
             var sourceCode = File.ReadAllText(fileName);
 
-            PhpAntlrParseTree ust = (PhpAntlrParseTree)parser.Parse(new SourceCodeFile(fileName) { Code = sourceCode });
+            PhpAntlrParseTree ust = (PhpAntlrParseTree)parser.Parse(new CodeFile(sourceCode) { Name = fileName });
 
             classUsings.Clear();
             methodInvocations.Clear();
@@ -113,7 +112,7 @@ namespace PT.SourceStats
             return "";
         }
 
-        public string VisitUseDeclaration([NotNull] PHPParser.UseDeclarationContext context)
+        public string VisitUseDeclaration([NotNull] PhpParser.UseDeclarationContext context)
         {
             if (context.Function() != null)
             {
@@ -137,12 +136,12 @@ namespace PT.SourceStats
             return VisitChildren(context);
         }
 
-        public string VisitUseDeclarationContent([NotNull] PHPParser.UseDeclarationContentContext context)
+        public string VisitUseDeclarationContent([NotNull] PhpParser.UseDeclarationContentContext context)
         {
             return Visit(context.namespaceNameList());
         }
 
-        public string VisitClassDeclaration([NotNull] PHPParser.ClassDeclarationContext context)
+        public string VisitClassDeclaration([NotNull] PhpParser.ClassDeclarationContext context)
         {
             var id = Visit(context.identifier());
             excludedClasses.Add(id);
@@ -151,7 +150,7 @@ namespace PT.SourceStats
             return VisitChildren(context);
         }
 
-        public string VisitClassStatement([NotNull] PHPParser.ClassStatementContext context)
+        public string VisitClassStatement([NotNull] PhpParser.ClassStatementContext context)
         {
             if (context.Function() != null)
             {
@@ -162,12 +161,12 @@ namespace PT.SourceStats
             return VisitChildren(context);
         }
 
-        public string VisitParenthesis([NotNull] PHPParser.ParenthesisContext context)
+        public string VisitParenthesis([NotNull] PhpParser.ParenthesisContext context)
         {
             return Visit(context.GetChild(1));
         }
 
-        public string VisitNewExpr([NotNull] PHPParser.NewExprContext context)
+        public string VisitNewExpr([NotNull] PhpParser.NewExprContext context)
         {
             var typeRef = Visit(context.typeRef());
             if (!excludedClasses.Contains(typeRef))
@@ -181,7 +180,7 @@ namespace PT.SourceStats
                 (context.arguments() != null ? Visit(context.arguments()) : "");
         }
 
-        public string VisitFunctionDeclaration([NotNull] PHPParser.FunctionDeclarationContext context)
+        public string VisitFunctionDeclaration([NotNull] PhpParser.FunctionDeclarationContext context)
         {
             var id = Visit(context.identifier());
             excludedMethods.Add(id);
@@ -190,7 +189,7 @@ namespace PT.SourceStats
             return VisitChildren(context);
         }
 
-        public string VisitMemberAccess([NotNull] PHPParser.MemberAccessContext context)
+        public string VisitMemberAccess([NotNull] PhpParser.MemberAccessContext context)
         {
             var functionName = Visit(context.keyedFieldName());
 
@@ -208,7 +207,7 @@ namespace PT.SourceStats
             return VisitChildren(context);
         }
 
-        public string VisitFunctionCall([NotNull] PHPParser.FunctionCallContext context)
+        public string VisitFunctionCall([NotNull] PhpParser.FunctionCallContext context)
         {
             var functionName = Visit(context.functionCallName());
             var argsStr = Visit(context.actualArguments());
@@ -233,7 +232,7 @@ namespace PT.SourceStats
             return functionName + Delimeter + argsStr;
         }
 
-        public string VisitBaseCtorCall([NotNull] PHPParser.BaseCtorCallContext context)
+        public string VisitBaseCtorCall([NotNull] PhpParser.BaseCtorCallContext context)
         {
             var className = Visit(context.identifier());
             if (!excludedClasses.Contains(className))
@@ -246,7 +245,7 @@ namespace PT.SourceStats
             return ":" + Delimeter + className + Visit(context.arguments());
         }
 
-        public string VisitSpecialWordExpression([NotNull] PHPParser.SpecialWordExpressionContext context)
+        public string VisitSpecialWordExpression([NotNull] PhpParser.SpecialWordExpressionContext context)
         {
             string result;
             if (context.Require() != null || context.RequireOnce() != null || context.Include() != null || context.IncludeOnce() != null)
@@ -265,702 +264,702 @@ namespace PT.SourceStats
             return result;
         }
 
-        public string VisitChainExpression([NotNull] PHPParser.ChainExpressionContext context)
+        public string VisitChainExpression([NotNull] PhpParser.ChainExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitUnaryOperatorExpression([NotNull] PHPParser.UnaryOperatorExpressionContext context)
+        public string VisitUnaryOperatorExpression([NotNull] PhpParser.UnaryOperatorExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitArrayCreationExpression([NotNull] PHPParser.ArrayCreationExpressionContext context)
+        public string VisitArrayCreationExpression([NotNull] PhpParser.ArrayCreationExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitNewExpression([NotNull] PHPParser.NewExpressionContext context)
+        public string VisitNewExpression([NotNull] PhpParser.NewExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitParenthesisExpression([NotNull] PHPParser.ParenthesisExpressionContext context)
+        public string VisitParenthesisExpression([NotNull] PhpParser.ParenthesisExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitBackQuoteStringExpression([NotNull] PHPParser.BackQuoteStringExpressionContext context)
+        public string VisitBackQuoteStringExpression([NotNull] PhpParser.BackQuoteStringExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitIndexerExpression([NotNull] PHPParser.IndexerExpressionContext context)
+        public string VisitIndexerExpression([NotNull] PhpParser.IndexerExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitScalarExpression([NotNull] PHPParser.ScalarExpressionContext context)
+        public string VisitScalarExpression([NotNull] PhpParser.ScalarExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitPrefixIncDecExpression([NotNull] PHPParser.PrefixIncDecExpressionContext context)
+        public string VisitPrefixIncDecExpression([NotNull] PhpParser.PrefixIncDecExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitPrintExpression([NotNull] PHPParser.PrintExpressionContext context)
+        public string VisitPrintExpression([NotNull] PhpParser.PrintExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAssignmentExpression([NotNull] PHPParser.AssignmentExpressionContext context)
+        public string VisitAssignmentExpression([NotNull] PhpParser.AssignmentExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitPostfixIncDecExpression([NotNull] PHPParser.PostfixIncDecExpressionContext context)
+        public string VisitPostfixIncDecExpression([NotNull] PhpParser.PostfixIncDecExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitCastExpression([NotNull] PHPParser.CastExpressionContext context)
+        public string VisitCastExpression([NotNull] PhpParser.CastExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitLambdaFunctionExpression([NotNull] PHPParser.LambdaFunctionExpressionContext context)
+        public string VisitLambdaFunctionExpression([NotNull] PhpParser.LambdaFunctionExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitCloneExpression([NotNull] PHPParser.CloneExpressionContext context)
+        public string VisitCloneExpression([NotNull] PhpParser.CloneExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitHtmlDocument([NotNull] PHPParser.HtmlDocumentContext context)
+        public string VisitHtmlDocument([NotNull] PhpParser.HtmlDocumentContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitHtmlElementOrPhpBlock([NotNull] PHPParser.HtmlElementOrPhpBlockContext context)
+        public string VisitHtmlElementOrPhpBlock([NotNull] PhpParser.HtmlElementOrPhpBlockContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitHtmlElements([NotNull] PHPParser.HtmlElementsContext context)
+        public string VisitHtmlElements([NotNull] PhpParser.HtmlElementsContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitHtmlElement([NotNull] PHPParser.HtmlElementContext context)
+        public string VisitHtmlElement([NotNull] PhpParser.HtmlElementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitScriptTextPart([NotNull] PHPParser.ScriptTextPartContext context)
+        public string VisitScriptTextPart([NotNull] PhpParser.ScriptTextPartContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitPhpBlock([NotNull] PHPParser.PhpBlockContext context)
+        public string VisitPhpBlock([NotNull] PhpParser.PhpBlockContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitImportStatement([NotNull] PHPParser.ImportStatementContext context)
+        public string VisitImportStatement([NotNull] PhpParser.ImportStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTopStatement([NotNull] PHPParser.TopStatementContext context)
+        public string VisitTopStatement([NotNull] PhpParser.TopStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitUseDeclarationContentList([NotNull] PHPParser.UseDeclarationContentListContext context)
+        public string VisitUseDeclarationContentList([NotNull] PhpParser.UseDeclarationContentListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitNamespaceDeclaration([NotNull] PHPParser.NamespaceDeclarationContext context)
+        public string VisitNamespaceDeclaration([NotNull] PhpParser.NamespaceDeclarationContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitNamespaceStatement([NotNull] PHPParser.NamespaceStatementContext context)
+        public string VisitNamespaceStatement([NotNull] PhpParser.NamespaceStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitClassEntryType([NotNull] PHPParser.ClassEntryTypeContext context)
+        public string VisitClassEntryType([NotNull] PhpParser.ClassEntryTypeContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitInterfaceList([NotNull] PHPParser.InterfaceListContext context)
+        public string VisitInterfaceList([NotNull] PhpParser.InterfaceListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTypeParameterListInBrackets([NotNull] PHPParser.TypeParameterListInBracketsContext context)
+        public string VisitTypeParameterListInBrackets([NotNull] PhpParser.TypeParameterListInBracketsContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTypeParameterList([NotNull] PHPParser.TypeParameterListContext context)
+        public string VisitTypeParameterList([NotNull] PhpParser.TypeParameterListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTypeParameterWithDefaultsList([NotNull] PHPParser.TypeParameterWithDefaultsListContext context)
+        public string VisitTypeParameterWithDefaultsList([NotNull] PhpParser.TypeParameterWithDefaultsListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTypeParameterDecl([NotNull] PHPParser.TypeParameterDeclContext context)
+        public string VisitTypeParameterDecl([NotNull] PhpParser.TypeParameterDeclContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTypeParameterWithDefaultDecl([NotNull] PHPParser.TypeParameterWithDefaultDeclContext context)
+        public string VisitTypeParameterWithDefaultDecl([NotNull] PhpParser.TypeParameterWithDefaultDeclContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitGenericDynamicArgs([NotNull] PHPParser.GenericDynamicArgsContext context)
+        public string VisitGenericDynamicArgs([NotNull] PhpParser.GenericDynamicArgsContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAttributes([NotNull] PHPParser.AttributesContext context)
+        public string VisitAttributes([NotNull] PhpParser.AttributesContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAttributesGroup([NotNull] PHPParser.AttributesGroupContext context)
+        public string VisitAttributesGroup([NotNull] PhpParser.AttributesGroupContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAttribute([NotNull] PHPParser.AttributeContext context)
+        public string VisitAttribute([NotNull] PhpParser.AttributeContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAttributeArgList([NotNull] PHPParser.AttributeArgListContext context)
+        public string VisitAttributeArgList([NotNull] PhpParser.AttributeArgListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAttributeNamedArgList([NotNull] PHPParser.AttributeNamedArgListContext context)
+        public string VisitAttributeNamedArgList([NotNull] PhpParser.AttributeNamedArgListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAttributeNamedArg([NotNull] PHPParser.AttributeNamedArgContext context)
+        public string VisitAttributeNamedArg([NotNull] PhpParser.AttributeNamedArgContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitInnerStatementList([NotNull] PHPParser.InnerStatementListContext context)
+        public string VisitInnerStatementList([NotNull] PhpParser.InnerStatementListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitInnerStatement([NotNull] PHPParser.InnerStatementContext context)
+        public string VisitInnerStatement([NotNull] PhpParser.InnerStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitStatement([NotNull] PHPParser.StatementContext context)
+        public string VisitStatement([NotNull] PhpParser.StatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitEmptyStatement([NotNull] PHPParser.EmptyStatementContext context)
+        public string VisitEmptyStatement([NotNull] PhpParser.EmptyStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitNonEmptyStatement([NotNull] PHPParser.NonEmptyStatementContext context)
+        public string VisitBlockStatement([NotNull] PhpParser.BlockStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitBlockStatement([NotNull] PHPParser.BlockStatementContext context)
+        public string VisitIfStatement([NotNull] PhpParser.IfStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitIfStatement([NotNull] PHPParser.IfStatementContext context)
+        public string VisitElseIfStatement([NotNull] PhpParser.ElseIfStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitElseIfStatement([NotNull] PHPParser.ElseIfStatementContext context)
+        public string VisitElseIfColonStatement([NotNull] PhpParser.ElseIfColonStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitElseIfColonStatement([NotNull] PHPParser.ElseIfColonStatementContext context)
+        public string VisitElseStatement([NotNull] PhpParser.ElseStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitElseStatement([NotNull] PHPParser.ElseStatementContext context)
+        public string VisitElseColonStatement([NotNull] PhpParser.ElseColonStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitElseColonStatement([NotNull] PHPParser.ElseColonStatementContext context)
+        public string VisitWhileStatement([NotNull] PhpParser.WhileStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitWhileStatement([NotNull] PHPParser.WhileStatementContext context)
+        public string VisitDoWhileStatement([NotNull] PhpParser.DoWhileStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitDoWhileStatement([NotNull] PHPParser.DoWhileStatementContext context)
+        public string VisitForStatement([NotNull] PhpParser.ForStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitForStatement([NotNull] PHPParser.ForStatementContext context)
+        public string VisitForInit([NotNull] PhpParser.ForInitContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitForInit([NotNull] PHPParser.ForInitContext context)
+        public string VisitForUpdate([NotNull] PhpParser.ForUpdateContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitForUpdate([NotNull] PHPParser.ForUpdateContext context)
+        public string VisitSwitchStatement([NotNull] PhpParser.SwitchStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitSwitchStatement([NotNull] PHPParser.SwitchStatementContext context)
+        public string VisitSwitchBlock([NotNull] PhpParser.SwitchBlockContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitSwitchBlock([NotNull] PHPParser.SwitchBlockContext context)
+        public string VisitBreakStatement([NotNull] PhpParser.BreakStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitBreakStatement([NotNull] PHPParser.BreakStatementContext context)
+        public string VisitContinueStatement([NotNull] PhpParser.ContinueStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitContinueStatement([NotNull] PHPParser.ContinueStatementContext context)
+        public string VisitReturnStatement([NotNull] PhpParser.ReturnStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitReturnStatement([NotNull] PHPParser.ReturnStatementContext context)
+        public string VisitExpressionStatement([NotNull] PhpParser.ExpressionStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitExpressionStatement([NotNull] PHPParser.ExpressionStatementContext context)
+        public string VisitUnsetStatement([NotNull] PhpParser.UnsetStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitUnsetStatement([NotNull] PHPParser.UnsetStatementContext context)
+        public string VisitForeachStatement([NotNull] PhpParser.ForeachStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitForeachStatement([NotNull] PHPParser.ForeachStatementContext context)
+        public string VisitTryCatchFinally([NotNull] PhpParser.TryCatchFinallyContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTryCatchFinally([NotNull] PHPParser.TryCatchFinallyContext context)
+        public string VisitCatchClause([NotNull] PhpParser.CatchClauseContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitCatchClause([NotNull] PHPParser.CatchClauseContext context)
+        public string VisitFinallyStatement([NotNull] PhpParser.FinallyStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitFinallyStatement([NotNull] PHPParser.FinallyStatementContext context)
+        public string VisitThrowStatement([NotNull] PhpParser.ThrowStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitThrowStatement([NotNull] PHPParser.ThrowStatementContext context)
+        public string VisitGotoStatement([NotNull] PhpParser.GotoStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitGotoStatement([NotNull] PHPParser.GotoStatementContext context)
+        public string VisitDeclareStatement([NotNull] PhpParser.DeclareStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitDeclareStatement([NotNull] PHPParser.DeclareStatementContext context)
+        public string VisitInlineHtml([NotNull] PhpParser.InlineHtmlContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitInlineHtml([NotNull] PHPParser.InlineHtmlContext context)
+        public string VisitDeclareList([NotNull] PhpParser.DeclareListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitDeclareList([NotNull] PHPParser.DeclareListContext context)
+        public string VisitFormalParameterList([NotNull] PhpParser.FormalParameterListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitFormalParameterList([NotNull] PHPParser.FormalParameterListContext context)
+        public string VisitFormalParameter([NotNull] PhpParser.FormalParameterContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitFormalParameter([NotNull] PHPParser.FormalParameterContext context)
+        public string VisitTypeHint([NotNull] PhpParser.TypeHintContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTypeHint([NotNull] PHPParser.TypeHintContext context)
+        public string VisitGlobalStatement([NotNull] PhpParser.GlobalStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitGlobalStatement([NotNull] PHPParser.GlobalStatementContext context)
+        public string VisitGlobalVar([NotNull] PhpParser.GlobalVarContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitGlobalVar([NotNull] PHPParser.GlobalVarContext context)
+        public string VisitEchoStatement([NotNull] PhpParser.EchoStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitEchoStatement([NotNull] PHPParser.EchoStatementContext context)
+        public string VisitStaticVariableStatement([NotNull] PhpParser.StaticVariableStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitStaticVariableStatement([NotNull] PHPParser.StaticVariableStatementContext context)
+        public string VisitTraitAdaptations([NotNull] PhpParser.TraitAdaptationsContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTraitAdaptations([NotNull] PHPParser.TraitAdaptationsContext context)
+        public string VisitTraitAdaptationStatement([NotNull] PhpParser.TraitAdaptationStatementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTraitAdaptationStatement([NotNull] PHPParser.TraitAdaptationStatementContext context)
+        public string VisitTraitPrecedence([NotNull] PhpParser.TraitPrecedenceContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTraitPrecedence([NotNull] PHPParser.TraitPrecedenceContext context)
+        public string VisitTraitAlias([NotNull] PhpParser.TraitAliasContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTraitAlias([NotNull] PHPParser.TraitAliasContext context)
+        public string VisitTraitMethodReference([NotNull] PhpParser.TraitMethodReferenceContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTraitMethodReference([NotNull] PHPParser.TraitMethodReferenceContext context)
+        public string VisitMethodBody([NotNull] PhpParser.MethodBodyContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitMethodBody([NotNull] PHPParser.MethodBodyContext context)
+        public string VisitPropertyModifiers([NotNull] PhpParser.PropertyModifiersContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitPropertyModifiers([NotNull] PHPParser.PropertyModifiersContext context)
+        public string VisitMemberModifiers([NotNull] PhpParser.MemberModifiersContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitMemberModifiers([NotNull] PHPParser.MemberModifiersContext context)
+        public string VisitVariableInitializer([NotNull] PhpParser.VariableInitializerContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitVariableInitializer([NotNull] PHPParser.VariableInitializerContext context)
+        public string VisitIdentifierInititalizer([NotNull] PhpParser.IdentifierInititalizerContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitIdentifierInititalizer([NotNull] PHPParser.IdentifierInititalizerContext context)
+        public string VisitGlobalConstantDeclaration([NotNull] PhpParser.GlobalConstantDeclarationContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitGlobalConstantDeclaration([NotNull] PHPParser.GlobalConstantDeclarationContext context)
+        public string VisitExpressionList([NotNull] PhpParser.ExpressionListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitExpressionList([NotNull] PHPParser.ExpressionListContext context)
+        public string VisitExpression([NotNull] PhpParser.ExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitExpression([NotNull] PHPParser.ExpressionContext context)
+        public string VisitComparisonExpression([NotNull] PhpParser.ComparisonExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitComparisonExpression([NotNull] PHPParser.ComparisonExpressionContext context)
+        public string VisitAssignmentOperator([NotNull] PhpParser.AssignmentOperatorContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAssignmentOperator([NotNull] PHPParser.AssignmentOperatorContext context)
+        public string VisitYieldExpression([NotNull] PhpParser.YieldExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitYieldExpression([NotNull] PHPParser.YieldExpressionContext context)
+        public string VisitArrayItemList([NotNull] PhpParser.ArrayItemListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitArrayItemList([NotNull] PHPParser.ArrayItemListContext context)
+        public string VisitArrayItem([NotNull] PhpParser.ArrayItemContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitArrayItem([NotNull] PHPParser.ArrayItemContext context)
+        public string VisitLambdaFunctionUseVars([NotNull] PhpParser.LambdaFunctionUseVarsContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitLambdaFunctionUseVars([NotNull] PHPParser.LambdaFunctionUseVarsContext context)
+        public string VisitLambdaFunctionUseVar([NotNull] PhpParser.LambdaFunctionUseVarContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitLambdaFunctionUseVar([NotNull] PHPParser.LambdaFunctionUseVarContext context)
+        public string VisitQualifiedStaticTypeRef([NotNull] PhpParser.QualifiedStaticTypeRefContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitQualifiedStaticTypeRef([NotNull] PHPParser.QualifiedStaticTypeRefContext context)
+        public string VisitTypeRef([NotNull] PhpParser.TypeRefContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitTypeRef([NotNull] PHPParser.TypeRefContext context)
+        public string VisitIndirectTypeRef([NotNull] PhpParser.IndirectTypeRefContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitIndirectTypeRef([NotNull] PHPParser.IndirectTypeRefContext context)
+        public string VisitQualifiedNamespaceName([NotNull] PhpParser.QualifiedNamespaceNameContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitQualifiedNamespaceName([NotNull] PHPParser.QualifiedNamespaceNameContext context)
+        public string VisitNamespaceNameList([NotNull] PhpParser.NamespaceNameListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitNamespaceNameList([NotNull] PHPParser.NamespaceNameListContext context)
+        public string VisitQualifiedNamespaceNameList([NotNull] PhpParser.QualifiedNamespaceNameListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitQualifiedNamespaceNameList([NotNull] PHPParser.QualifiedNamespaceNameListContext context)
+        public string VisitArguments([NotNull] PhpParser.ArgumentsContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitArguments([NotNull] PHPParser.ArgumentsContext context)
+        public string VisitActualArgument([NotNull] PhpParser.ActualArgumentContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitActualArgument([NotNull] PHPParser.ActualArgumentContext context)
+        public string VisitConstantInititalizer([NotNull] PhpParser.ConstantInititalizerContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitConstantInititalizer([NotNull] PHPParser.ConstantInititalizerContext context)
+        public string VisitConstantArrayItemList([NotNull] PhpParser.ConstantArrayItemListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitConstantArrayItemList([NotNull] PHPParser.ConstantArrayItemListContext context)
+        public string VisitConstantArrayItem([NotNull] PhpParser.ConstantArrayItemContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitConstantArrayItem([NotNull] PHPParser.ConstantArrayItemContext context)
+        public string VisitConstant([NotNull] PhpParser.ConstantContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitConstant([NotNull] PHPParser.ConstantContext context)
+        public string VisitLiteralConstant([NotNull] PhpParser.LiteralConstantContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitLiteralConstant([NotNull] PHPParser.LiteralConstantContext context)
+        public string VisitNumericConstant([NotNull] PhpParser.NumericConstantContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitNumericConstant([NotNull] PHPParser.NumericConstantContext context)
+        public string VisitClassConstant([NotNull] PhpParser.ClassConstantContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitClassConstant([NotNull] PHPParser.ClassConstantContext context)
+        public string VisitStringConstant([NotNull] PhpParser.StringConstantContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitStringConstant([NotNull] PHPParser.StringConstantContext context)
+        public string VisitString([NotNull] PhpParser.StringContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitString([NotNull] PHPParser.StringContext context)
+        public string VisitInterpolatedStringPart([NotNull] PhpParser.InterpolatedStringPartContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitInterpolatedStringPart([NotNull] PHPParser.InterpolatedStringPartContext context)
+        public string VisitChainList([NotNull] PhpParser.ChainListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitChainList([NotNull] PHPParser.ChainListContext context)
+        public string VisitChain([NotNull] PhpParser.ChainContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitChain([NotNull] PHPParser.ChainContext context)
+        public string VisitFunctionCallName([NotNull] PhpParser.FunctionCallNameContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitFunctionCallName([NotNull] PHPParser.FunctionCallNameContext context)
+        public string VisitActualArguments([NotNull] PhpParser.ActualArgumentsContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitActualArguments([NotNull] PHPParser.ActualArgumentsContext context)
+        public string VisitChainBase([NotNull] PhpParser.ChainBaseContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitChainBase([NotNull] PHPParser.ChainBaseContext context)
+        public string VisitKeyedFieldName([NotNull] PhpParser.KeyedFieldNameContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitKeyedFieldName([NotNull] PHPParser.KeyedFieldNameContext context)
+        public string VisitKeyedSimpleFieldName([NotNull] PhpParser.KeyedSimpleFieldNameContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitKeyedSimpleFieldName([NotNull] PHPParser.KeyedSimpleFieldNameContext context)
+        public string VisitKeyedVariable([NotNull] PhpParser.KeyedVariableContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitKeyedVariable([NotNull] PHPParser.KeyedVariableContext context)
+        public string VisitSquareCurlyExpression([NotNull] PhpParser.SquareCurlyExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitSquareCurlyExpression([NotNull] PHPParser.SquareCurlyExpressionContext context)
+        public string VisitAssignmentList([NotNull] PhpParser.AssignmentListContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAssignmentList([NotNull] PHPParser.AssignmentListContext context)
+        public string VisitAssignmentListElement([NotNull] PhpParser.AssignmentListElementContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitAssignmentListElement([NotNull] PHPParser.AssignmentListElementContext context)
+        public string VisitModifier([NotNull] PhpParser.ModifierContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitModifier([NotNull] PHPParser.ModifierContext context)
+        public string VisitIdentifier([NotNull] PhpParser.IdentifierContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitIdentifier([NotNull] PHPParser.IdentifierContext context)
+        public string VisitMemberModifier([NotNull] PhpParser.MemberModifierContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitMemberModifier([NotNull] PHPParser.MemberModifierContext context)
+        public string VisitMagicConstant([NotNull] PhpParser.MagicConstantContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitMagicConstant([NotNull] PHPParser.MagicConstantContext context)
+        public string VisitMagicMethod([NotNull] PhpParser.MagicMethodContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitMagicMethod([NotNull] PHPParser.MagicMethodContext context)
+        public string VisitPrimitiveType([NotNull] PhpParser.PrimitiveTypeContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitPrimitiveType([NotNull] PHPParser.PrimitiveTypeContext context)
+        public string VisitCastOperation([NotNull] PhpParser.CastOperationContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitCastOperation([NotNull] PHPParser.CastOperationContext context)
+        public string VisitConditionalExpression([NotNull] PhpParser.ConditionalExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitConditionalExpression([NotNull] PHPParser.ConditionalExpressionContext context)
+        public string VisitArithmeticExpression([NotNull] PhpParser.ArithmeticExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitArithmeticExpression([NotNull] PHPParser.ArithmeticExpressionContext context)
+        public string VisitLogicalExpression([NotNull] PhpParser.LogicalExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitLogicalExpression([NotNull] PHPParser.LogicalExpressionContext context)
+        public string VisitInstanceOfExpression([NotNull] PhpParser.InstanceOfExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitInstanceOfExpression([NotNull] PHPParser.InstanceOfExpressionContext context)
+        public string VisitBitwiseExpression([NotNull] PhpParser.BitwiseExpressionContext context)
         {
             return VisitChildren(context);
         }
 
-        public string VisitBitwiseExpression([NotNull] PHPParser.BitwiseExpressionContext context)
+        public string VisitInlineHtmlStatement([NotNull] PhpParser.InlineHtmlStatementContext context)
         {
             return VisitChildren(context);
         }
