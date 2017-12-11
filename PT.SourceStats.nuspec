@@ -8,7 +8,7 @@
     
     <owners>ptsecurity,KvanTTT</owners>
     <title>PT Source Statistics</title>
-    <licenseUrl>https://creativecommons.org/licenses/by-nc/4.0/legalcode</licenseUrl>
+    <licenseUrl>https://github.com/PositiveTechnologies/PT.SourceStats/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://approof.ptsecurity.com/</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <copyright>Copyright 2016-2017</copyright>
