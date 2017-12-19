@@ -40,7 +40,7 @@
       <HintPath>..\packages\Antlr4.Runtime.4.6.3\lib\net45\Antlr4.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="AspxParser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c8e42bbdfc6e2790, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\AspxParser.dll</HintPath>
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\AspxParser.dll</HintPath>
     </Reference>
     <Reference Include="FluentCommandLineParser, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentCommandLineParser.1.4.3\lib\net35\FluentCommandLineParser.dll</HintPath>
@@ -58,38 +58,38 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.4.10\lib\net45\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.dll</HintPath>
+    <Reference Include="PT.PM, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.AntlrUtils, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.AntlrUtils.dll</HintPath>
+    <Reference Include="PT.PM.AntlrUtils, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.AntlrUtils.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.Common, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.Common.dll</HintPath>
+    <Reference Include="PT.PM.Common, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.Common.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.CSharpParseTreeUst, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.CSharpParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.CSharpParseTreeUst, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.CSharpParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.Dsl, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.Dsl.dll</HintPath>
+    <Reference Include="PT.PM.Dsl, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.Dsl.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.JavaParseTreeUst, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.JavaParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.JavaParseTreeUst, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.JavaParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.JavaScriptParseTreeUst, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.JavaScriptParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.JavaScriptParseTreeUst, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.JavaScriptParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.Matching, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.Matching.dll</HintPath>
+    <Reference Include="PT.PM.Matching, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.Matching.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.Patterns, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.Patterns.dll</HintPath>
+    <Reference Include="PT.PM.Patterns, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.Patterns.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.PhpParseTreeUst, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.PhpParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.PhpParseTreeUst, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.PhpParseTreeUst.dll</HintPath>
     </Reference>
-    <Reference Include="PT.PM.SqlParseTreeUst, Version=1.5.0.279, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\PT.PM.SqlParseTreeUst.dll</HintPath>
+    <Reference Include="PT.PM.SqlParseTreeUst, Version=1.5.1.292, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\PT.PM.SqlParseTreeUst.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -158,7 +158,7 @@
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.RegularExpressions">
-      <HintPath>..\packages\PT.PM.1.5.0.279\lib\net462\System.Web.RegularExpressions.dll</HintPath>
+      <HintPath>..\packages\PT.PM.1.5.1.292\lib\net462\System.Web.RegularExpressions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
