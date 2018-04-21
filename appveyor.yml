@@ -17,15 +17,17 @@ before_build:
     dotnet build PT.SourceStats.sln -c Release
 
     if ($isWindows) {
-
         dotnet publish PT.SourceStats.Cli/PT.SourceStats.Cli.csproj -c Release -o ../bin/net462 -f net462
-
     }
+build:
+  project: PT.SourceStats.sln
 test_script:
 - ps: |
     cd PT.SourceStats.Tests/bin/Release/netcoreapp2.0
 
     dotnet vstest PT.SourceStats.Tests.dll --logger:nunit
+
+    $wc = New-Object 'System.Net.WebClient'
 
     $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$env:APPVEYOR_JOB_ID", (Resolve-Path ./TestResults/TestResults.xml))
 
@@ -33,11 +35,9 @@ test_script:
 after_test:
 - ps: |
     if ($isWindows) {
-
         cd bin/net462
 
-        7z a PT.PM.SourceStats-netcoreapp2.0-$env:APPVEYOR_BUILD_VERSION.zip *.exe *.dll *.config *.json runtimes
+        7z a PT.PM.SourceStats-net462-$env:APPVEYOR_BUILD_VERSION.zip *.exe *.dll *.config *.json runtimes
 
-        Push-AppveyorArtifact PT.PM.SourceStats-netcoreapp2.0-$env:APPVEYOR_BUILD_VERSION.zip
-
+        Push-AppveyorArtifact PT.PM.SourceStats-net462-$env:APPVEYOR_BUILD_VERSION.zip
     }
