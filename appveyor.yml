@@ -1,6 +1,5 @@
 image:
 - Visual Studio 2017
-- Ubuntu
 version: 1.6.0.{build}
 configuration: Release
 skip_branch_with_pr: true
@@ -37,7 +36,7 @@ after_test:
     if ($isWindows) {
         cd bin/net462
 
-        7z a PT.PM.SourceStats-net462-$env:APPVEYOR_BUILD_VERSION.zip *.exe *.dll *.config *.json runtimes
+        7z a PT.SourceStats-net462-$env:APPVEYOR_BUILD_VERSION.zip *.exe *.dll *.config *.json runtimes
 
-        Push-AppveyorArtifact PT.PM.SourceStats-net462-$env:APPVEYOR_BUILD_VERSION.zip
+        Push-AppveyorArtifact PT.SourceStats-net462-$env:APPVEYOR_BUILD_VERSION.zip
     }
