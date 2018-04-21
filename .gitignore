@@ -203,9 +203,7 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
-Sources/AI.PM.PhpAstConversion/T4/ConverterExtensions.g.cs
-Sources/AI.PM.PhpAstConversion/T4/ConverterVisitorGenerator.g.cs
 
-# ANTLR Generated files
-**/Generated/*
-Tests/Unit/Downloaded/*
+launchSettings.json
+
+
