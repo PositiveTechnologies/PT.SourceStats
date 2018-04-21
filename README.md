@@ -3,12 +3,9 @@
 Utility for statistics collection for different projects.
 At present time C#, Java and PHP supported.
 
-## Build Status, NuGet and Artifacts
+## Build Status and Artifacts
 
 [![PT.SourceStats Build Status](https://ci.appveyor.com/api/projects/status/vo0acpvek4q1x8yh?svg=true)](https://ci.appveyor.com/project/KvanTTT/pt-sourcestats)
-
-The last nightly packages can be found here: [https://ci.appveyor.com/nuget/pt-sourcestats-4gails4hwlb6](https://ci.appveyor.com/nuget/pt-sourcestats-4gails4hwlb6).
-Artifacts also [available](https://ci.appveyor.com/project/KvanTTT/pt-sourcestats/build/artifacts).
 
 ## Command Line Arguments
 
