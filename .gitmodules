@@ -1,0 +1,4 @@
+[submodule "PT.PM"]
+	path = PT.PM
+	url = https://github.com/PositiveTechnologies/PT.PM.git
+	branch = master
