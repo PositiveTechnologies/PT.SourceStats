@@ -3,7 +3,6 @@ using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using PT.PM.Common;
 using PT.PM.PhpParseTreeUst;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -59,7 +58,7 @@ namespace PT.SourceStats
             {
                 return tree.Accept(this);
             }
-            catch (Exception ex)
+            catch
             {
                 var parserRuleContext = tree as ParserRuleContext;
                 if (parserRuleContext != null)

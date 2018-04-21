@@ -24,7 +24,7 @@ namespace PT.SourceStats.Cli
         {
             try
             {
-                using (var handler = new WebRequestHandler())
+                using (var handler = new HttpClientHandler())
                 {
                     handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                     handler.ClientCertificates.Add(LoadCert());
@@ -57,7 +57,7 @@ namespace PT.SourceStats.Cli
         {
             try
             {
-                using (var handler = new WebRequestHandler())
+                using (var handler = new HttpClientHandler())
                 {
                     //handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                     handler.ClientCertificates.Add(LoadCert());
