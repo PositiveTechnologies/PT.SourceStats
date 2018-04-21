@@ -1,37 +1,43 @@
-os: Visual Studio 2017
-version: 1.5.1.{build}
+image:
+- Visual Studio 2017
+- Ubuntu
+version: 1.6.0.{build}
 configuration: Release
-platform: Any CPU
 skip_branch_with_pr: true
-nuget:
-  disable_publish_on_pr: true
+install:
+- git submodule update --init --recursive
 assembly_info:
   patch: true
-  file: AssemblyInfoCommon.cs
+  file: AssemblyInfoCommon.cs;
   assembly_version: '{version}'
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 before_build:
-- cmd: >-
-    nuget sources add -Name PT.PM -Source https://ci.appveyor.com/nuget/pt-pm-mk0aj1y5uned
+- ps: |
+    dotnet build PT.SourceStats.sln -c Release
 
-    nuget restore PT.SourceStats.sln
-build:
-  project: PT.SourceStats.sln
-  verbosity: minimal
-  publish_nuget: true
-test:
-  assemblies:
-  - PT.SourceStats.Tests\bin\$(configuration)\*.Tests.dll
+    if ($isWindows) {
+
+        dotnet publish PT.SourceStats.Cli/PT.SourceStats.Cli.csproj -c Release -o ../bin/net462 -f net462
+
+    }
+test_script:
+- ps: |
+    cd PT.SourceStats.Tests/bin/Release/netcoreapp2.0
+
+    dotnet vstest PT.SourceStats.Tests.dll --logger:nunit
+
+    $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$env:APPVEYOR_JOB_ID", (Resolve-Path ./TestResults/TestResults.xml))
+
+    cd ../../../..
 after_test:
-- cmd: >-
-    nuget pack PT.SourceStats.nuspec -version %APPVEYOR_BUILD_VERSION%
+- ps: |
+    if ($isWindows) {
 
-    cd bin\%CONFIGURATION%\PT.SourceStats
+        cd bin/net462
 
-    7z a PT.SourceStats.Cli-%APPVEYOR_BUILD_VERSION%.zip *.dll PT.SourceStats.Cli.exe *.config
-artifacts:
-- path: bin\$(configuration)\PT.SourceStats\*.zip
-  name: PT.SourceStats.Cli
-- path: '*.nupkg'
-  name: PT.SourceStats.NuGet
+        7z a PT.PM.SourceStats-netcoreapp2.0-$env:APPVEYOR_BUILD_VERSION.zip *.exe *.dll *.config *.json runtimes
+
+        Push-AppveyorArtifact PT.PM.SourceStats-netcoreapp2.0-$env:APPVEYOR_BUILD_VERSION.zip
+
+    }
