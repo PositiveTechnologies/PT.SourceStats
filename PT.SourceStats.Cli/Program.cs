@@ -105,6 +105,12 @@ namespace PT.SourceStats.Cli
                 parser.HelpOption.ShowHelp(parser.Options);
                 logger.LogInfo(new ErrorMessage(parsingResult.ErrorText));
             }
+
+            if (Debugger.IsAttached)
+            {
+                Console.WriteLine("Press Enter to exit");
+                Console.ReadLine();
+            }
         }
     }
 }
