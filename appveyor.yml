@@ -16,7 +16,7 @@ before_build:
     dotnet build PT.SourceStats.sln -c Release
 
     if ($isWindows) {
-        dotnet publish PT.SourceStats.Cli/PT.SourceStats.Cli.csproj -c Release -o ../bin/net462 -f net462
+        dotnet publish PT.SourceStats.Cli/PT.SourceStats.Cli.csproj -c Release -o ../bin/net472 -f net472
     }
 build:
   project: PT.SourceStats.sln
@@ -34,9 +34,9 @@ test_script:
 after_test:
 - ps: |
     if ($isWindows) {
-        cd bin/net462
+        cd bin/net472
 
-        7z a PT.SourceStats-net462-$env:APPVEYOR_BUILD_VERSION.zip *.exe *.dll *.config *.json runtimes
+        7z a PT.SourceStats-net472-$env:APPVEYOR_BUILD_VERSION.zip *.exe *.dll *.config *.json runtimes
 
-        Push-AppveyorArtifact PT.SourceStats-net462-$env:APPVEYOR_BUILD_VERSION.zip
+        Push-AppveyorArtifact PT.SourceStats-net472-$env:APPVEYOR_BUILD_VERSION.zip
     }
