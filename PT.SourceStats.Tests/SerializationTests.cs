@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
-using PT.PM.Common.Json;
 using System.Collections.Generic;
 
 namespace PT.SourceStats.Tests
@@ -18,7 +17,7 @@ namespace PT.SourceStats.Tests
                 new StatisticsMessage
                 {
                     ErrorCount = 0,
-                    LanguageStatistics = new List<LanguageStatistics>()
+                    LanguageStatistics = new List<LanguageStatistics>
                     {
                         new PhpStatistics(),
                         new JavaStatistics(),

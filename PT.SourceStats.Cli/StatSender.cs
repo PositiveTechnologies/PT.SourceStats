@@ -7,8 +7,8 @@ namespace PT.SourceStats.Cli
     {
         public async Task SendStat(string stat, string server)
         {
-            var clinet = new HttpsClientWithCert();
-            var result = await clinet.SendData(new Uri(server), stat);
+            var client = new HttpsClientWithCert();
+            await client.SendData(new Uri(server), stat);
         }
     }
 }

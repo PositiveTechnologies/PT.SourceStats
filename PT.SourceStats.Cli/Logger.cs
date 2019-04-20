@@ -1,22 +1,22 @@
 ﻿using Newtonsoft.Json;
 using System;
 using NLog;
-using PT.PM.Common.CodeRepository;
-using PT.PM.Common.Json;
+using ILogger = PT.PM.Common.ILogger;
+using LogLevel = PT.PM.Common.LogLevel;
 
 namespace PT.SourceStats.Cli
 {
-    public class Logger : PT.PM.Common.ILogger
+    public class Logger : ILogger
     {
-        private NLog.Logger ConsoleLogger = LogManager.GetLogger("console");
-        private NLog.Logger FileLogger = LogManager.GetLogger("file");
+        private readonly NLog.Logger consoleLogger = LogManager.GetLogger("console");
+        private readonly NLog.Logger fileLogger = LogManager.GetLogger("file");
         private int errorCount;
 
         public int ErrorCount => errorCount;
 
-        public LogLevel LogLevel { get; set; }
+        public string LogsDir { get; set; }
 
-        public SourceCodeRepository SourceCodeRepository { get; set; }
+        public LogLevel LogLevel { get; set; }
 
         public void LogDebug(string message)
         {
@@ -36,20 +36,20 @@ namespace PT.SourceStats.Cli
                 {
                     errorCount++;
                 }
-                if ((message.MessageType == MessageType.Progress && LogLevel <= LogLevel.All) ||
-                    (message.MessageType == MessageType.Error && LogLevel <= LogLevel.Errors) ||
-                    (message.MessageType == MessageType.Result && LogLevel <= LogLevel.Result))
+                if (message.MessageType == MessageType.Result && LogLevel >= LogLevel.Off ||
+                    message.MessageType == MessageType.Error && LogLevel >= LogLevel.Error ||
+                    message.MessageType == MessageType.Progress && LogLevel >= LogLevel.Info)
                 {
                     var json = JsonConvert.SerializeObject(message, Formatting.Indented);
-                    ConsoleLogger.Info(json);
-                    FileLogger.Info(json);
+                    consoleLogger.Info(json);
+                    fileLogger.Info(json);
                 }
             }
         }
 
         public void LogInfo(string message)
         {
-            ConsoleLogger.Info(message);
+            consoleLogger.Info(message);
         }
 
         public Logger()

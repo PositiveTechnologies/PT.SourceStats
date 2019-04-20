@@ -6,7 +6,7 @@ namespace PT.SourceStats
 {
     public class PhpStatistics : LanguageStatistics
     {
-        public override Language Language => Php.Language;
+        public override Language Language => Language.Php;
 
         public Dictionary<string, string> FilesContent { get; set; } = new Dictionary<string, string>();
 

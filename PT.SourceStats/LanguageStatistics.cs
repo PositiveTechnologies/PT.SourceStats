@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using PT.PM.Common;
-using PT.PM.Common.Json;
 
 namespace PT.SourceStats
 {
     public abstract class LanguageStatistics
     {
-        [JsonConverter(typeof(LanguageJsonConverter))]
+        [JsonConverter(typeof(StringEnumConverter))]
         public abstract Language Language { get; }
     }
 }

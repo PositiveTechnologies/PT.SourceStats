@@ -6,6 +6,7 @@ using PT.PM.PhpParseTreeUst;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using PT.PM.Common.Files;
 
 namespace PT.SourceStats
 {
@@ -13,12 +14,12 @@ namespace PT.SourceStats
     {
         private string Delimeter = "";
 
-        private Dictionary<string, int> classUsings = new Dictionary<string, int>();
-        private Dictionary<string, int> methodInvocations = new Dictionary<string, int>();
-        private Dictionary<string, int> includes = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> classUsings = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> methodInvocations = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> includes = new Dictionary<string, int>();
 
-        private HashSet<string> excludedMethods = new HashSet<string>();
-        private HashSet<string> excludedClasses = new HashSet<string>();
+        private readonly HashSet<string> excludedMethods = new HashSet<string>();
+        private readonly HashSet<string> excludedClasses = new HashSet<string>();
 
         public ILogger Logger { get; set; }
 
@@ -28,17 +29,20 @@ namespace PT.SourceStats
 
         public FileStatistics CollectInfo(string fileName)
         {
+            var lexer = new PhpAntlrLexer();
+            var sourceFile = new TextFile(File.ReadAllText(fileName)) {Name = fileName};
+            var tokens = lexer.GetTokens(sourceFile, out _);
+
             var parser = new PhpAntlrParser();
             parser.Logger = Logger;
-            var sourceCode = File.ReadAllText(fileName);
-
-            PhpAntlrParseTree ust = (PhpAntlrParseTree)parser.Parse(new CodeFile(sourceCode) { Name = fileName });
+            parser.SourceFile = sourceFile;
+            PhpAntlrParseTree ust = (PhpAntlrParseTree)parser.Parse(tokens, out _);
 
             classUsings.Clear();
             methodInvocations.Clear();
             includes.Clear();
 
-            var str = Visit(ust.SyntaxTree);
+            Visit(ust.SyntaxTree);
 
             var result = new FileStatistics
             {
@@ -60,8 +64,7 @@ namespace PT.SourceStats
             }
             catch
             {
-                var parserRuleContext = tree as ParserRuleContext;
-                if (parserRuleContext != null)
+                if (tree is ParserRuleContext)
                 {
                     //AntlrHelper.LogConversionError(ex, parserRuleContext, FileNode.FileName.Text, FileNode.FileData, Logger);
                 }
@@ -91,7 +94,8 @@ namespace PT.SourceStats
             {
                 return "";
             }
-            else if (text.StartsWith("$"))
+
+            if (text.StartsWith("$"))
             {
                 result = text.Substring(1);
             }
@@ -103,6 +107,7 @@ namespace PT.SourceStats
             {
                 result = text.ToLowerInvariant();
             }
+
             return result;
         }
 
@@ -121,8 +126,7 @@ namespace PT.SourceStats
                     var functionName = Visit(list.useDeclarationContent(i));
                     if (!excludedMethods.Contains(functionName))
                     {
-                        int count = 0;
-                        methodInvocations.TryGetValue(functionName, out count);
+                        methodInvocations.TryGetValue(functionName, out int count);
                         methodInvocations[functionName] = count + 1;
                     }
                     else
@@ -170,8 +174,7 @@ namespace PT.SourceStats
             var typeRef = Visit(context.typeRef());
             if (!excludedClasses.Contains(typeRef))
             {
-                int count = 0;
-                classUsings.TryGetValue(typeRef, out count);
+                classUsings.TryGetValue(typeRef, out int count);
                 classUsings[typeRef] = count + 1;
             }
 
@@ -194,8 +197,7 @@ namespace PT.SourceStats
 
             if (!excludedMethods.Contains(functionName))
             {
-                int count = 0;
-                methodInvocations.TryGetValue(functionName, out count);
+                methodInvocations.TryGetValue(functionName, out int count);
                 methodInvocations[functionName] = count + 1;
             }
             else
@@ -213,14 +215,12 @@ namespace PT.SourceStats
 
             if (functionName == "include" || functionName == "require_once" || functionName == "include" || functionName == "include_once")
             {
-                int count = 0;
-                includes.TryGetValue(argsStr, out count);
+                includes.TryGetValue(argsStr, out int count);
                 includes[argsStr] = count + 1;
             }
             if (!excludedMethods.Contains(functionName))
             {
-                int count = 0;
-                methodInvocations.TryGetValue(functionName, out count);
+                methodInvocations.TryGetValue(functionName, out int count);
                 methodInvocations[functionName] = count + 1;
             }
             else
@@ -236,8 +236,7 @@ namespace PT.SourceStats
             var className = Visit(context.identifier());
             if (!excludedClasses.Contains(className))
             {
-                int count = 0;
-                classUsings.TryGetValue(className, out count);
+                classUsings.TryGetValue(className, out int count);
                 classUsings[className] = count + 1;
             }
 
@@ -249,9 +248,8 @@ namespace PT.SourceStats
             string result;
             if (context.Require() != null || context.RequireOnce() != null || context.Include() != null || context.IncludeOnce() != null)
             {
-                int count = 0;
                 string includeName = Visit(context.expression());
-                includes.TryGetValue(includeName, out count);
+                includes.TryGetValue(includeName, out int count);
                 includes[includeName] = count + 1;
 
                 result = Visit(context.GetChild(0)) + Delimeter + includeName;

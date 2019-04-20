@@ -6,7 +6,7 @@ namespace PT.SourceStats
 {
     public class CSharpStatistics : LanguageStatistics
     {
-        public override Language Language => CSharp.Language;
+        public override Language Language => Language.CSharp;
 
         public int FilesCount { get; set; } = 0;
 

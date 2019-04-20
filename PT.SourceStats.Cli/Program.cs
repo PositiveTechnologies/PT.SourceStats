@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using PT.PM.Common.Utils;
 using static System.String;
 
 namespace PT.SourceStats.Cli
@@ -26,13 +27,13 @@ namespace PT.SourceStats.Cli
             string outDir = Empty;
             bool multithreading = false;
             bool sendStatistics = false;
-            LogLevel logLevel = LogLevel.All;
+            LogLevel logLevel = LogLevel.Info;
             int startInd = 0;
             int length = 0;
             bool showVersion = false;
             var logger = new Logger();
 
-            parser.Setup<string>('f', "file").Callback(f => fileName = f.NormDirSeparator());
+            parser.Setup<string>('f', "file").Callback(f => fileName = f.NormalizeDirSeparator());
             parser.Setup<bool>("mt").Callback(mt => multithreading = mt);
             parser.Setup<bool>("send-statistics").Callback(ss => sendStatistics = ss);
             parser.Setup<LogLevel>("log-level").Callback(ll => logLevel = ll);
@@ -40,7 +41,7 @@ namespace PT.SourceStats.Cli
             parser.Setup<int>("length").Callback(l => length = l);
             parser.Setup<string>("project-id").Callback(pid => projectId = pid);
             parser.Setup<string>("server-uri").Callback(s => serverUri = s);
-            parser.Setup<string>("out-dir").Callback(dir => outDir = dir.NormDirSeparator());
+            parser.Setup<string>("out-dir").Callback(dir => outDir = dir.NormalizeDirSeparator());
             parser.Setup<bool>('v', "version").Callback(v => showVersion = v);
             parser.SetupHelp("?", "help").Callback(helpText => logger?.LogInfo(new ErrorMessage(helpText)));
 

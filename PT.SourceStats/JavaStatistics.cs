@@ -6,7 +6,7 @@ namespace PT.SourceStats
 {
     public class JavaStatistics : LanguageStatistics
     {
-        public override Language Language => Java.Language;
+        public override Language Language => Language.Java;
 
         public int FilesCount { get; set; } = 0;
 
